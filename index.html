@@ -521,10 +521,10 @@
   <header class="header">
     <div class="program-pill" id="t-program-pill">Virginia Early Childhood Care and Education</div>
     <h1 id="t-h1">Does your child <span class="accent">qualify</span> for publicly funded childcare?</h1>
-    <p class="header-lead" id="t-header-lead">Answer a few questions to find out if your family may be eligible for Head Start/Early Head Start, the Virginia Preschool Initiative (VPI), or the Mixed Delivery (MD) program — all high-quality childcare for eligible children ages birth through 5.</p>
+    <p class="header-lead" id="t-header-lead">Answer a few questions to find out if your family may be eligible for Early Head Start, Head Start, the Virginia Preschool Initiative (VPI), or the Mixed Delivery (MD) program — all high-quality childcare for eligible children ages birth through 5.</p>
     <div class="disclaimer">
       <div class="disc-icon">i</div>
-      <span id="t-disclaimer">This tool is not an official eligibility determination. A coordinator from Foundation First will confirm eligibility during enrollment.</span>
+      <span id="t-disclaimer">This tool is not an official eligibility determination. A staff member from Foundation First will confirm eligibility during enrollment.</span>
     </div>
   </header>
 
@@ -608,7 +608,7 @@
         <label class="option-card"><input type="checkbox" name="other-criteria" value="govt-assistance"><span id="t-oc10">Family receives government assistance (WIC, SNAP, TANF, or similar)</span></label>
         <label class="option-card"><input type="checkbox" name="other-criteria" value="trauma"><span id="t-oc11">Child or family has experienced abuse, trauma, or crisis in the past 5 years</span></label>
         <label class="option-card"><input type="checkbox" name="other-criteria" value="disability"><span id="t-oc12">Child has a disability or is eligible for special education (IDEA)</span></label>
-        <label class="option-card"><input type="checkbox" name="other-criteria" value="kinship"><span id="t-oc13">Child is in kinship or foster care</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="kinship"><span id="t-oc13">Child is in kinship or foster care (kinship care means living with relatives or caregivers other than their parents)</span></label>
         <label class="option-card"><input type="checkbox" name="other-criteria" value="ell"><span id="t-oc14">Child is an English Language Learner</span></label>
       </div>
     </div>
@@ -647,7 +647,7 @@
 
     <div class="contact-section" id="contact-section" style="display:none;">
       <h3 id="t-contact-h">Want someone to follow up with you?</h3>
-      <p id="t-contact-body">Leave your contact info and a Foundation First coordinator will reach out. This is completely optional — your result above is yours to keep regardless.</p>
+      <p id="t-contact-body">Leave your contact info and a Foundation First staff member will reach out. This is completely optional — your result above is yours to keep regardless.</p>
 
       <div class="field-block">
         <label class="field-label" for="contact-name" id="t-name-label">Name</label>
@@ -665,7 +665,7 @@
         </div>
       </div>
       <div class="privacy-note" id="t-privacy">Your information will only be used to follow up on your eligibility screening. It will not be shared with third parties. You may request removal at any time by contacting <a href="mailto:info@foundationfirstva.org">info@foundationfirstva.org</a>.</div>
-      <button class="btn-submit" onclick="submitContact()" id="t-btn-submit">Submit — Connect Me with a Coordinator</button>
+      <button class="btn-submit" onclick="submitContact()" id="t-btn-submit">Submit — Connect Me with a Staff Member</button>
       <button class="btn-skip" onclick="skipContact()" id="t-btn-skip">No thanks — I have what I need</button>
     </div>
 
@@ -711,7 +711,7 @@ const OC_LABELS = {
   'govt-assistance':   'Family receives government assistance (WIC, SNAP, TANF, or similar)',
   'trauma':            'Child or family has experienced abuse, trauma, or crisis in the past 5 years',
   'disability':        'Child has a disability or is eligible for special education (IDEA)',
-  'kinship':           'Child is in kinship or foster care',
+  'kinship':           'Child is in kinship or foster care (kinship care means living with relatives or caregivers other than their parents)',
   'ell':               'Child is an English Language Learner'
 };
 
@@ -721,8 +721,8 @@ const T = {
     'lang-toggle':     'Ver en Español',
     't-program-pill':  'Early Childhood Programs',
     't-h1':            'Does your child <span class="accent">qualify</span> for publicly funded childcare?',
-    't-header-lead':   "Answer a few questions to find out if your family may be eligible for Head Start, the Virginia Preschool Initiative (VPI), or the Mixed Delivery (MD) program — high-quality childcare for eligible children ages birth through 5.",
-    't-disclaimer':    'This tool is not an official eligibility determination. A coordinator from Foundation First will confirm eligibility during enrollment.',
+    't-header-lead':   "Answer a few questions to find out if your family may be eligible for Early Head Start, Head Start, the Virginia Preschool Initiative (VPI), or the Mixed Delivery (MD) program — high-quality childcare for eligible children ages birth through 5.",
+    't-disclaimer':    'This tool is not an official eligibility determination. A staff member from Foundation First will confirm eligibility during enrollment.',
     't-sec1':          'About Your Family',
     't-county-label':  'County or City',
     't-county-ph':     'Select…',
@@ -747,19 +747,19 @@ const T = {
     't-oc10': 'Family receives government assistance (WIC, SNAP, TANF, or similar)',
     't-oc11': 'Child or family has experienced abuse, trauma, or crisis in the past 5 years',
     't-oc12': 'Child has a disability or is eligible for special education (IDEA)',
-    't-oc13': 'Child is in kinship or foster care',
+    't-oc13': 'Child is in kinship or foster care (kinship care means living with relatives or caregivers other than their parents)',
     't-oc14': 'Child is an English Language Learner',
     't-sec2':          "Children You'd Like to Enroll",
     't-children-hint': "Programs serve children from birth through age 5 (not yet in kindergarten). Select each child's age below.",
     't-add-child':     '+ Add another child',
     't-btn-check':     'Check My Eligibility →',
     't-contact-h':     'Want someone to follow up with you?',
-    't-contact-body':  'Leave your contact info and a Foundation First coordinator will reach out. This is completely optional — your result above is yours to keep regardless.',
+    't-contact-body':  'Leave your contact info and a Foundation First staff member will reach out. This is completely optional — your result above is yours to keep regardless.',
     't-name-label':    'Name',
     't-email-label':   'Email',
     't-zip-label':     'Zip Code',
     't-privacy':       'Your information will only be used to follow up on your eligibility screening. It will not be shared with third parties. You may request removal at any time by contacting <a href="mailto:info@foundationfirstva.org">info@foundationfirstva.org</a>.',
-    't-btn-submit':    'Submit — Connect Me with a Coordinator',
+    't-btn-submit':    'Submit — Connect Me with a Staff Member',
     't-btn-skip':      'No thanks — I have what I need',
     't-confirm-h':     "You're all set.",
     't-restart':       'Start over',
@@ -771,18 +771,18 @@ const T = {
     'child-label':     'Child',
     'child-status-ok':  '✓ Eligible age',
     'child-status-out': 'Over age 5',
-    'confirm-with':    'Thank you, {name}. A coordinator will be in touch soon at {contact}.',
-    'confirm-anon':    'A coordinator will be in touch soon. In the meantime, review the results above.',
+    'confirm-with':    'Thank you, {name}. A staff member will be in touch soon at {contact}.',
+    'confirm-anon':    'A staff member will be in touch soon. In the meantime, review the results above.',
     'confirm-skip':    "Your results are shown above. Reach out to Foundation First whenever you're ready — foundationfirstva.org",
     'r-tag-eligible':   'May Qualify',
     'r-tag-ineligible': 'May Not Qualify',
     'r-head-eligible':   'Your child may qualify for publicly funded care.',
     'r-head-ineligible': 'Your family may not meet current eligibility criteria.',
-    'r-body-eligible':   "Based on what you've shared, your family may be eligible for one or more publicly funded early childhood programs. A coordinator will confirm eligibility and help connect you with a provider near you.",
-    'r-body-ineligible': "Based on what you've shared, your family may not currently meet eligibility criteria for publicly funded early childhood programs — but there may be other options, and a coordinator can review any additional factors that might apply.",
+    'r-body-eligible':   "Based on what you've shared, your family may be eligible for one or more publicly funded early childhood programs. A staff member will confirm eligibility and help connect you with a provider near you.",
+    'r-body-ineligible': "Based on what you've shared, your family may not currently meet eligibility criteria for publicly funded early childhood programs — but there may be other options, and a staff member can review any additional factors that might apply.",
     'r-programs-heading': 'Your child may qualify for publicly funded care through:',
-    'r-prog-hs':         '<strong>Head Start</strong> — federally funded early learning for income-eligible children 0–5. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Learn more</a>',
-    'r-prog-vpi':        '<strong>Virginia Preschool Initiative (VPI)</strong> — free preschool for eligible 3- and 4-year-olds. Age eligibility may vary by location. <a href="https://www.doe.virginia.gov/early-child/preschool-initiative" target="_blank">Learn more</a>',
+    'r-prog-ehs': '<strong>Early Head Start</strong> — federally funded early learning for income-eligible children 0–3. Age eligibility may vary by location. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Learn more</a>',
+    'r-prog-hs': '<strong>Head Start</strong> — federally funded early learning for income-eligible children 3–5. Age eligibility may vary by location. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Learn more</a>',    'r-prog-vpi':        '<strong>Virginia Preschool Initiative (VPI)</strong> — free preschool for eligible 3- and 4-year-olds. Age eligibility may vary by location. <a href="https://www.doe.virginia.gov/early-child/preschool-initiative" target="_blank">Learn more</a>',
     'r-prog-md':         '<strong>Mixed Delivery (MD)</strong> — high-quality childcare for eligible children 0–5. <a href="https://foundationfirstva.org/looking-for-childcare/" target="_blank">Learn more</a>',
     'r-other1': '<strong>Child Care Subsidy Program (CCSP)</strong> — financial assistance for qualifying working families. <a href="https://www.dss.virginia.gov/family/cc/index.cgi" target="_blank">Learn more</a>',
     'r-other2': '<strong>Head Start / Early Head Start</strong> — federal program for low-income families, children 0–5. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Find a program</a>',
@@ -793,7 +793,7 @@ const T = {
     'lang-toggle':     'View in English',
     't-program-pill':  'Programas de Primera Infancia',
     't-h1':            '¿Su hijo <span class="accent">califica</span> para cuidado infantil financiado públicamente?',
-    't-header-lead':   'Responda algunas preguntas para saber si su familia puede ser elegible para Head Start, la Iniciativa Preescolar de Virginia (VPI), o el programa de Mixed Delivery — cuidado infantil de alta calidad y de día completo para niños elegibles desde el nacimiento hasta los 5 años.',
+    't-header-lead':   'Responda algunas preguntas para saber si su familia puede ser elegible para Early Head Start, Head Start, la Iniciativa Preescolar de Virginia (VPI), o el programa de Mixed Delivery — cuidado infantil de alta calidad y de día completo para niños elegibles desde el nacimiento hasta los 5 años.',
     't-disclaimer':    'Esta herramienta no es una determinación oficial de elegibilidad. Un coordinador de Foundation First confirmará la elegibilidad durante la inscripción.',
     't-sec1':          'Sobre Su Familia',
     't-county-label':  'Condado o Ciudad',
@@ -819,19 +819,19 @@ const T = {
     't-oc10': 'La familia recibe asistencia gubernamental (WIC, SNAP, TANF u otros)',
     't-oc11': 'El niño o la familia ha experimentado abuso, trauma o crisis en los últimos 5 años',
     't-oc12': 'El niño tiene una discapacidad o es elegible para educación especial (IDEA)',
-    't-oc13': 'El niño está en cuidado familiar o de crianza',
+    't-oc13': 'El niño está en cuidado familiar o de crianza (cuidado familiar se refiere a niños que viven con familiares o cuidadores que no son sus padres)',
     't-oc14': 'El niño es aprendiz del inglés (English Language Learner)',
     't-sec2':          'Niños que Desea Inscribir',
     't-children-hint': 'Los programas atienden a niños desde el nacimiento hasta los 5 años (que aún no estén en kindergarten). Seleccione la edad de cada niño.',
     't-add-child':     '+ Agregar otro niño',
     't-btn-check':     'Verificar Mi Elegibilidad →',
     't-contact-h':     '¿Desea que alguien le dé seguimiento?',
-    't-contact-body':  'Deje su información de contacto y un coordinador de Foundation First se comunicará con usted. Esto es completamente opcional.',
+    't-contact-body':  'Deje su información de contacto y un miembro del personal de Foundation First se comunicará con usted. Esto es completamente opcional — su resultado se muestra arriba de todas formas.',
     't-name-label':    'Nombre',
     't-email-label':   'Correo electrónico',
     't-zip-label':     'Código Postal',
     't-privacy':       'Su información solo se utilizará para dar seguimiento a su evaluación de elegibilidad. No se compartirá con terceros. Puede solicitar su eliminación en cualquier momento contactando a <a href="mailto:info@foundationfirstva.org">info@foundationfirstva.org</a>.',
-    't-btn-submit':    'Enviar — Conectarme con un Coordinador',
+    't-btn-submit':    'Enviar — Conectarme con un Miembro del Personal',
     't-btn-skip':      'No gracias — ya tengo lo que necesito',
     't-confirm-h':     'Todo listo.',
     't-restart':       'Empezar de nuevo',
@@ -843,8 +843,8 @@ const T = {
     'child-label':     'Niño',
     'child-status-ok':  '✓ Edad elegible',
     'child-status-out': 'Mayor de 5 años',
-    'confirm-with':    'Gracias, {name}. Un coordinador se comunicará pronto a {contact}.',
-    'confirm-anon':    'Un coordinador se comunicará pronto. Mientras tanto, revise los resultados anteriores.',
+    'confirm-with': 'Gracias, {name}. Un miembro del personal se comunicará pronto a {contact}.',
+    'confirm-anon': 'Un miembro del personal se comunicará pronto. Mientras tanto, revise los resultados anteriores.',
     'confirm-skip':    'Sus resultados se muestran arriba. Comuníquese con Foundation First cuando esté listo — foundationfirstva.org',
     'r-tag-eligible':   'Puede Calificar',
     'r-tag-ineligible': 'Puede No Calificar',
@@ -853,8 +853,8 @@ const T = {
     'r-body-eligible':   'Según lo que ha compartido, su familia puede ser elegible para uno o más programas de primera infancia financiados públicamente. Un coordinador confirmará la elegibilidad y le ayudará a conectarse con un proveedor cerca de usted.',
     'r-body-ineligible': 'Según lo que ha compartido, su familia puede no cumplir actualmente los criterios de elegibilidad — pero puede haber otras opciones, y un coordinador puede revisar factores adicionales que puedan aplicar.',
     'r-programs-heading': 'Su hijo puede calificar para cuidado financiado públicamente mediante:',
-    'r-prog-hs':         '<strong>Head Start</strong> — aprendizaje temprano financiado federalmente para niños 0–5. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Más información</a>',
-    'r-prog-vpi':        '<strong>Iniciativa Preescolar de Virginia (VPI)</strong> — preescolar gratuito para niños elegibles de 3 y 4 años. La elegibilidad por edad puede variar. <a href="https://www.doe.virginia.gov/early-child/preschool-initiative" target="_blank">Más información</a>',
+    'r-prog-ehs': '<strong>Early Head Start</strong> — aprendizaje temprano financiado federalmente para niños elegibles de 0–3. La elegibilidad por edad puede variar. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Más información</a>',
+    'r-prog-hs': '<strong>Head Start</strong> — aprendizaje temprano financiado federalmente para niños elegibles de 3–5. La elegibilidad por edad puede variar. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Más información</a>',    'r-prog-vpi':        '<strong>Iniciativa Preescolar de Virginia (VPI)</strong> — preescolar gratuito para niños elegibles de 3 y 4 años. La elegibilidad por edad puede variar. <a href="https://www.doe.virginia.gov/early-child/preschool-initiative" target="_blank">Más información</a>',
     'r-prog-md':         '<strong>Mixed Delivery (MD)</strong> — cuidado infantil de alta calidad y día completo para niños elegibles 0–5. <a href="https://foundationfirstva.org/looking-for-childcare/" target="_blank">Más información</a>',
     'r-other1': '<strong>Programa de Subsidio para el Cuidado Infantil (CCSP)</strong> — asistencia financiera para familias trabajadoras. <a href="https://www.dss.virginia.gov/family/cc/index.cgi" target="_blank">Más información</a>',
     'r-other2': '<strong>Head Start / Early Head Start</strong> — programa federal para familias de bajos ingresos, niños 0–5. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Encontrar un programa</a>',
@@ -899,7 +899,11 @@ function applyLang() {
 }
 function matchedPrograms(p) {
   const out = [];
-  if (p.hs)  out.push('Head Start');
+  if (p.hs) {
+    const ages = getChildAges();
+    if (ages.some(a => a <= 3)) out.push('Early Head Start');
+    if (ages.some(a => a >= 3 && a <= 5)) out.push('Head Start');
+  }
   if (p.vpi) out.push('VPI');
   if (p.md)  out.push('Mixed Delivery');
   return out;
@@ -1075,10 +1079,18 @@ function renderResult(result, programs) {
     list.appendChild(hd);
 
     if (programs.hs) {
-      const li = document.createElement('li');
-      li.innerHTML = `<span class="r-icon">→</span><span>${t('r-prog-hs')}</span>`;
-      list.appendChild(li);
-    }
+  const ages = getChildAges();
+  if (ages.some(a => a <= 3)) {
+    const li1 = document.createElement('li');
+    li1.innerHTML = `<span class="r-icon">→</span><span>${t('r-prog-ehs')}</span>`;
+    list.appendChild(li1);
+  }
+  if (ages.some(a => a >= 3 && a <= 5)) {
+    const li2 = document.createElement('li');
+    li2.innerHTML = `<span class="r-icon">→</span><span>${t('r-prog-hs')}</span>`;
+    list.appendChild(li2);
+  }
+}
     if (programs.vpi) {
       const li = document.createElement('li');
       li.innerHTML = `<span class="r-icon">→</span><span>${t('r-prog-vpi')}</span>`;
