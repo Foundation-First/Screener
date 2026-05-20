@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Childcare Eligibility Screener — Foundation First VA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #1b3a6b;
+    --navy-dark:   #122850;
+    --navy-light:  #e8edf5;
+    --orange:      #e8621a;
+    --orange-dark: #c44e10;
+    --orange-light:#fdf1ea;
+    --teal:        #2a7d6f;
+    --teal-light:  #e6f4f1;
+    --yellow:      #f5a623;
+    --yellow-light:#fef8ec;
+    --slate:       #2c3a3a;
+    --slate-mid:   #637070;
+    --off-white:   #f5f7fa;
+    --white:       #ffffff;
+    --border:      #d6dde8;
+    --red:         #c0392b;
+    --radius:      10px;
+    --tr:          0.2s ease;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    background: var(--off-white);
+    color: var(--slate);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  .top-bar {
+    background: var(--navy-light);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .lang-btn {
+    background: rgba(27,58,107,0.08);
+    border: 1px solid rgba(27,58,107,0.2);
+    border-radius: 99px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: var(--navy);
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: background var(--tr);
+    white-space: nowrap;
+    position: absolute;
+    right: 28px;
+  }
+  .lang-btn:hover { background: rgba(27,58,107,0.14); }
+
+  .page-wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 36px 24px 72px;
+  }
+
+  .header { margin-bottom: 28px; }
+
+  .program-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--navy-light);
+    border: 1px solid #c2cfe0;
+    border-radius: 99px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+
+  .program-pill::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+
+  .header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .header h1 .accent { color: var(--orange); }
+
+  .header-lead {
+    font-size: 15px;
+    color: var(--slate-mid);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+
+  .disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--orange-light);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #7a3a10;
+    line-height: 1.55;
+  }
+
+  .disc-icon {
+    width: 16px; height: 16px; min-width: 16px;
+    background: var(--orange);
+    border-radius: 50%;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+
+  .screener-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--navy);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 0;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .field-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: var(--slate);
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color var(--tr), box-shadow var(--tr);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input:focus, select:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(27,58,107,0.1);
+    background: var(--white);
+  }
+
+  input.error, select.error {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.08);
+  }
+
+  .error-msg { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+  .error-msg.visible { display: block; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .field-block { margin-bottom: 16px; }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .options-grid .option-card span { font-size: 12.5px; }
+
+  .option-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color var(--tr), background var(--tr);
+    user-select: none;
+  }
+
+  .option-card:hover { border-color: var(--navy); background: var(--navy-light); }
+  .option-card.selected { border-color: var(--navy); background: var(--navy-light); }
+
+  .option-card input[type="checkbox"] {
+    width: 15px; height: 15px; min-width: 15px;
+    border-radius: 3px; padding: 0;
+    cursor: pointer; accent-color: var(--navy);
+    margin-top: 2px; flex-shrink: 0;
+  }
+
+  .option-card span { font-size: 13px; line-height: 1.4; color: var(--slate); }
+
+  .child-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    padding: 9px 14px;
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .child-row label { font-size: 13px; font-weight: 600; color: var(--navy); flex-shrink: 0; min-width: 56px; }
+  .child-row select { width: auto; min-width: 180px; margin: 0; font-size: 14px; }
+  .child-row .child-status { font-size: 12px; font-weight: 600; margin-left: auto; }
+  .child-status.ok-green { color: var(--teal); }
+  .child-status.out      { color: var(--orange); }
+
+  .btn-add-child {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: none;
+    border: 1.5px dashed #a0b4cc;
+    color: var(--navy);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background var(--tr), border-color var(--tr);
+    margin-top: 4px;
+  }
+  .btn-add-child:hover { background: var(--navy-light); border-color: var(--navy); }
+
+  .section-divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  .fpl-hint {
+    font-size: 12px; font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    text-decoration: underline dotted;
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  .fpl-table-wrap {
+    display: none;
+    background: var(--navy-light);
+    border: 1px solid #c2cfe0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 10px;
+    font-size: 13px;
+  }
+  .fpl-table-wrap.open { display: block; }
+
+  .fpl-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .fpl-table th {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--navy);
+    text-align: left; padding: 4px 8px 4px 0;
+    border-bottom: 1px solid #c2cfe0;
+  }
+  .fpl-table th.right { text-align: right; }
+  .fpl-table td { padding: 5px 8px 5px 0; color: var(--slate); border-bottom: 1px solid var(--border); }
+  .fpl-table td.right { text-align: right; }
+  .fpl-table tr:last-child td { border-bottom: none; }
+  .tier-100 { color: #7b3fa0; font-weight: 600; }
+  .tier-200 { color: var(--teal); font-weight: 600; }
+  .tier-350 { color: #a06b00; font-weight: 600; }
+
+  .contact-section {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-section h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .contact-section p {
+    font-size: 13px; color: var(--slate-mid);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+
+  .privacy-note {
+    font-size: 11px; color: var(--slate-mid);
+    background: var(--off-white);
+    border-radius: 6px; padding: 8px 12px;
+    margin-top: 10px; line-height: 1.5;
+  }
+
+  .btn-check {
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px; font-weight: 700;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background var(--tr), transform var(--tr);
+    margin-top: 20px;
+  }
+  .btn-check:hover  { background: var(--navy-dark); }
+  .btn-check:active { transform: scale(0.99); }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px; font-weight: 700;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background var(--tr);
+    margin-top: 14px;
+  }
+  .btn-submit:hover { background: var(--orange-dark); }
+
+  .btn-skip {
+    width: 100%;
+    background: none;
+    border: 1.5px solid var(--border);
+    color: var(--slate-mid);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--tr);
+    margin-top: 8px;
+  }
+  .btn-skip:hover { border-color: var(--navy); color: var(--navy); }
+
+  #result-box {
+    display: none;
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-top: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  #result-box.eligible   { background: var(--teal-light);   border: 1px solid #a8d5cc; border-left: 4px solid var(--teal); }
+  #result-box.ineligible { background: var(--orange-light); border: 1px solid #f0c4a8; border-left: 4px solid var(--orange); }
+
+  .result-tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 99px;
+    margin-bottom: 10px;
+  }
+
+  .eligible   .result-tag { background: var(--teal);   color: var(--white); }
+  .ineligible .result-tag { background: var(--orange); color: var(--white); }
+
+  .result-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px; font-weight: 700;
+    line-height: 1.25; margin-bottom: 10px;
+    color: var(--navy);
+  }
+
+  .result-body { font-size: 14px; line-height: 1.75; color: var(--slate-mid); margin-bottom: 16px; }
+
+  .result-list { list-style: none; padding: 0; }
+  .result-list li {
+    display: flex; align-items: flex-start; gap: 9px;
+    font-size: 14px; padding: 7px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--slate); line-height: 1.5;
+  }
+  .result-list li:last-child { border-bottom: none; }
+
+  .r-icon {
+    width: 20px; height: 20px; min-width: 20px;
+    border-radius: 50%; background: var(--navy);
+    color: var(--white); font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+
+  .ineligible .r-icon { background: var(--orange); }
+
+  .result-list a { color: var(--navy); font-weight: 600; text-decoration: none; }
+  .result-list a:hover { text-decoration: underline; }
+
+  .programs-heading {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 14px;
+    padding: 7px 0 4px;
+    border-bottom: none !important;
+  }
+
+  #confirm-box {
+    display: none;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--navy);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .confirm-icon {
+    width: 52px; height: 52px;
+    border-radius: 50%; background: var(--navy);
+    color: var(--white); font-size: 22px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  #confirm-box h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--navy); margin-bottom: 8px;
+  }
+
+  #confirm-box p { font-size: 14px; color: var(--slate-mid); line-height: 1.65; max-width: 420px; margin: 0 auto 20px; }
+
+  .btn-restart {
+    background: none; border: 1.5px solid var(--border);
+    color: var(--slate-mid);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px; padding: 9px 20px; border-radius: 8px;
+    cursor: pointer; transition: all var(--tr);
+  }
+  .btn-restart:hover { border-color: var(--navy); color: var(--navy); }
+
+  .page-footer {
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--slate-mid);
+    line-height: 1.65;
+  }
+  .page-footer a { color: var(--navy); text-decoration: none; }
+  .page-footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 500px) {
+    .field-row    { grid-template-columns: 1fr; }
+    .options-grid { grid-template-columns: 1fr; }
+    .screener-card { padding: 18px; }
+    .top-bar { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div style="display:flex;align-items:center;gap:20px;">
+    <img src="https://foundationfirstva.org/wp-content/uploads/2023/09/logo.png" alt="Foundation First VA" style="height:48px;width:auto;display:block;">
+    <img src="https://foundationfirstva.org/wp-content/uploads/2024/05/ready-region.png" alt="Ready Region North Central" style="height:48px;width:auto;display:block;">
+  </div>
+  <button class="lang-btn" onclick="toggleLang()" id="lang-toggle">Ver en Español</button>
+</div>
+
+<div class="page-wrap">
+
+  <header class="header">
+    <div class="program-pill" id="t-program-pill">Early Childhood Programs</div>
+    <h1 id="t-h1">Does your child <span class="accent">qualify</span> for publicly funded childcare?</h1>
+    <p class="header-lead" id="t-header-lead">Answer a few questions to find out if your family may be eligible for Head Start, the Virginia Preschool Initiative (VPI), or the Mixed Delivery (MD) program — high-quality childcare for eligible children ages birth through 5.</p>
+    <div class="disclaimer">
+      <div class="disc-icon">i</div>
+      <span id="t-disclaimer">This tool is not an official eligibility determination. A coordinator from Foundation First will confirm eligibility during enrollment.</span>
+    </div>
+  </header>
+
+  <div class="screener-card" id="screener-card">
+
+    <div class="section-label" id="t-sec1">About Your Family</div>
+
+    <div class="field-block">
+      <label class="field-label" for="county" id="t-county-label">County or City</label>
+      <select id="county">
+        <option value="" id="t-county-ph">Select…</option>
+        <option value="caroline">Caroline County</option>
+        <option value="culpeper">Culpeper County</option>
+        <option value="fauquier">Fauquier County</option>
+        <option value="fredericksburg">City of Fredericksburg</option>
+        <option value="king-george">King George County</option>
+        <option value="loudoun">Loudoun County</option>
+        <option value="manassas">Manassas City</option>
+        <option value="manassas-park">Manassas Park</option>
+        <option value="prince-william">Prince William County</option>
+        <option value="spotsylvania">Spotsylvania County</option>
+        <option value="stafford">Stafford County</option>
+      </select>
+      <div class="error-msg" id="county-error">Please select your county or city.</div>
+    </div>
+
+    <div class="field-row">
+      <div>
+        <label class="field-label" for="household-size" id="t-size-label">People in household</label>
+        <select id="household-size">
+          <option value="" id="t-select-ph">Select…</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+          <option value="7">7</option><option value="8">8+</option>
+        </select>
+        <div class="error-msg" id="size-error">Please select household size.</div>
+      </div>
+      <div>
+        <label class="field-label" for="income" id="t-income-label">Annual household income ($)</label>
+        <input type="number" id="income" placeholder="e.g. 45000" min="0">
+        <div class="error-msg" id="income-error">Please enter your annual income.</div>
+      </div>
+    </div>
+
+    <span class="fpl-hint" onclick="toggleFpl()" id="t-fpl-hint">▾ 2026 income eligibility thresholds</span>
+    <div class="fpl-table-wrap" id="fpl-table">
+      <p style="color:var(--navy);font-weight:600;font-size:13px;margin-bottom:6px;" id="t-fpl-title">2026 Federal Poverty Level Guidelines</p>
+      <table class="fpl-table">
+        <tr>
+          <th id="t-fpl-h1">Family size</th>
+          <th class="right"><span class="tier-100" id="t-fpl-h2">100% FPL</span></th>
+          <th class="right"><span class="tier-200" id="t-fpl-h3">200% FPL</span></th>
+          <th class="right"><span class="tier-350" id="t-fpl-h4">350% FPL</span></th>
+        </tr>
+        <tr><td>1</td><td class="right tier-100">$15,060</td><td class="right tier-200">$31,920</td><td class="right tier-350">$55,860</td></tr>
+        <tr><td>2</td><td class="right tier-100">$20,440</td><td class="right tier-200">$43,280</td><td class="right tier-350">$75,740</td></tr>
+        <tr><td>3</td><td class="right tier-100">$25,820</td><td class="right tier-200">$54,640</td><td class="right tier-350">$95,620</td></tr>
+        <tr><td>4</td><td class="right tier-100">$31,200</td><td class="right tier-200">$66,000</td><td class="right tier-350">$115,500</td></tr>
+        <tr><td>5</td><td class="right tier-100">$36,580</td><td class="right tier-200">$77,360</td><td class="right tier-350">$135,380</td></tr>
+        <tr><td>6</td><td class="right tier-100">$41,960</td><td class="right tier-200">$88,720</td><td class="right tier-350">$155,260</td></tr>
+        <tr><td>7</td><td class="right tier-100">$47,340</td><td class="right tier-200">$100,080</td><td class="right tier-350">$175,140</td></tr>
+        <tr><td>8</td><td class="right tier-100">$52,720</td><td class="right tier-200">$111,440</td><td class="right tier-350">$195,020</td></tr>
+      </table>
+      <p style="font-size:11px;color:var(--slate-mid);margin-top:8px;line-height:1.5;" id="t-fpl-note">100% FPL is the primary income threshold for Head Start. 200% FPL applies to VPI and Mixed Delivery. Families between 200–350% FPL may qualify for Mixed Delivery through Ready Region North Central regional criteria. Other qualifying factors may apply regardless of income.</p>
+    </div>
+
+    <div style="margin-top:20px;">
+      <label class="field-label" style="text-transform:none;font-size:13px;letter-spacing:0;font-weight:600;" id="t-other-q">
+        Does any of the following apply to your family? <span style="font-weight:400;color:var(--slate-mid);" id="t-other-opt">(optional — select all that apply)</span>
+      </label>
+      <div class="options-grid">
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="no-hs"><span id="t-oc1">Parent or guardian did not complete high school</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="young-parents"><span id="t-oc2">Both parents are younger than 20 years old</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="parent-disability"><span id="t-oc3">Parent or caregiver has a disability that impacts their ability to maintain employment or provide care</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="military"><span id="t-oc4">A parent is on military deployment for 9+ months this year</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="single-parent"><span id="t-oc5">Single parent or guardian with sole financial and caretaking responsibilities</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="incarcerated"><span id="t-oc6">Parent, guardian, or caregiver is currently incarcerated or was released within the past 2 years</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="homeless"><span id="t-oc7">Family experiencing homelessness</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="immigrant"><span id="t-oc8">Family has immigrated within the past 2 years</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="alice"><span id="t-oc9">Family is below the ALICE household survival budget</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="govt-assistance"><span id="t-oc10">Family receives government assistance (WIC, SNAP, TANF, or similar)</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="trauma"><span id="t-oc11">Child or family has experienced abuse, trauma, or crisis in the past 5 years</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="disability"><span id="t-oc12">Child has a disability or is eligible for special education (IDEA)</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="kinship"><span id="t-oc13">Child is in kinship or foster care</span></label>
+        <label class="option-card"><input type="checkbox" name="other-criteria" value="ell"><span id="t-oc14">Child is an English Language Learner</span></label>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="section-label" id="t-sec2">Children You'd Like to Enroll</div>
+    <p style="font-size:13px;color:var(--slate-mid);margin-bottom:14px;line-height:1.6;" id="t-children-hint">Programs serve children from birth through age 5 (not yet in kindergarten). Select each child's age below.</p>
+
+    <div id="children-list">
+      <div class="child-row" id="child-0">
+        <label id="child-label-0">Child 1</label>
+        <select onchange="updateChildStatus(0,this.value)" id="child-age-0">
+          <option value="">Age…</option>
+          <option value="0">Under 1 year</option>
+          <option value="1">1 year old</option>
+          <option value="2">2 years old</option>
+          <option value="3">3 years old</option>
+          <option value="4">4 years old</option>
+          <option value="5">5 years old</option>
+        </select>
+        <span class="child-status" id="cs-0"></span>
+      </div>
+    </div>
+    <button class="btn-add-child" onclick="addChild()" id="t-add-child">+ Add another child</button>
+    <div class="error-msg" id="children-error" style="margin-top:8px;">Please select at least one child's age.</div>
+
+    <button class="btn-check" onclick="checkEligibility()" id="t-btn-check">Check My Eligibility →</button>
+
+    <div id="result-box">
+      <span class="result-tag" id="r-tag"></span>
+      <h2 class="result-heading" id="r-heading"></h2>
+      <p class="result-body" id="r-body"></p>
+      <ul class="result-list" id="r-list"></ul>
+    </div>
+
+    <div class="contact-section" id="contact-section" style="display:none;">
+      <h3 id="t-contact-h">Want someone to follow up with you?</h3>
+      <p id="t-contact-body">Leave your contact info and a Foundation First coordinator will reach out. This is completely optional — your result above is yours to keep regardless.</p>
+
+      <div class="field-block">
+        <label class="field-label" for="contact-name" id="t-name-label">Name</label>
+        <input type="text" id="contact-name" placeholder="Your name" autocomplete="name">
+      </div>
+      <div class="field-row">
+        <div>
+          <label class="field-label" for="contact-email" id="t-email-label">Email</label>
+          <input type="email" id="contact-email" placeholder="you@email.com" autocomplete="email">
+        </div>
+        <div>
+          <label class="field-label" for="contact-zip" id="t-zip-label">Zip Code</label>
+          <input type="text" id="contact-zip" maxlength="5" placeholder="e.g. 22301" inputmode="numeric" autocomplete="postal-code">
+          <div class="error-msg" id="zip-error">Please enter a valid 5-digit Virginia zip code.</div>
+        </div>
+      </div>
+      <div class="privacy-note" id="t-privacy">Your information will only be used to follow up on your eligibility screening. It will not be shared with third parties. You may request removal at any time by contacting <a href="mailto:info@foundationfirstva.org">info@foundationfirstva.org</a>.</div>
+      <button class="btn-submit" onclick="submitContact()" id="t-btn-submit">Submit — Connect Me with a Coordinator</button>
+      <button class="btn-skip" onclick="skipContact()" id="t-btn-skip">No thanks — I have what I need</button>
+    </div>
+
+  </div>
+
+  <div id="confirm-box">
+    <div class="confirm-icon">✓</div>
+    <h2 id="t-confirm-h">You're all set.</h2>
+    <p id="confirm-message"></p>
+    <button class="btn-restart" onclick="restart()" id="t-restart">Start over</button>
+  </div>
+
+  <div class="page-footer">
+    <p>Foundation First &nbsp;·&nbsp; <a href="https://foundationfirstva.org" target="_blank">foundationfirstva.org</a> &nbsp;·&nbsp; <a href="mailto:info@foundationfirstva.org">info@foundationfirstva.org</a></p>
+    <p style="margin-top:4px;">This screener does not store personal data unless you choose to submit your contact information.</p>
+  </div>
+
+</div>
+
+<script>
+// ─── generate unique id for data storage on FF SharePoint ──────────────────────────────────────────────────────
+const SESSION_ID = crypto.randomUUID();
+// ─── 2026 FPL thresholds ──────────────────────────────────────────────────────
+const FPL_100 = [15060, 20440, 25820, 31200, 36580, 41960, 47340, 52720];
+const FPL_200 = [31920, 43280, 54640, 66000, 77360, 88720, 100080, 111440];
+const FPL_350 = [55860, 75740, 95620, 115500, 135380, 155260, 175140, 195020];
+
+// ─── Regional factors (trigger MD eligibility regardless of income) ───────────
+const REGIONAL_FACTORS = ['young-parents','parent-disability','military','single-parent',
+  'incarcerated','immigrant','alice','trauma','ell','govt-assistance','homeless'];
+
+// ─── OC Labels for email payload ─────────────────────────────────────────────
+const OC_LABELS = {
+  'no-hs':             'Parent or guardian did not complete high school',
+  'young-parents':     'Both parents are younger than 20 years old',
+  'parent-disability': 'Parent or caregiver has a disability that impacts their ability to maintain employment or provide care',
+  'military':          'A parent is on military deployment for 9+ months this year',
+  'single-parent':     'Single parent or guardian with sole financial and caretaking responsibilities',
+  'incarcerated':      'Parent, guardian, or caregiver is currently incarcerated or was released within the past 2 years',
+  'homeless':          'Family experiencing homelessness',
+  'immigrant':         'Family has immigrated within the past 2 years',
+  'alice':             'Family is below the ALICE household survival budget',
+  'govt-assistance':   'Family receives government assistance (WIC, SNAP, TANF, or similar)',
+  'trauma':            'Child or family has experienced abuse, trauma, or crisis in the past 5 years',
+  'disability':        'Child has a disability or is eligible for special education (IDEA)',
+  'kinship':           'Child is in kinship or foster care',
+  'ell':               'Child is an English Language Learner'
+};
+
+// ─── Translations ─────────────────────────────────────────────────────────────
+const T = {
+  en: {
+    'lang-toggle':     'Ver en Español',
+    't-program-pill':  'Early Childhood Programs',
+    't-h1':            'Does your child <span class="accent">qualify</span> for publicly funded childcare?',
+    't-header-lead':   "Answer a few questions to find out if your family may be eligible for Head Start, the Virginia Preschool Initiative (VPI), or the Mixed Delivery (MD) program — high-quality childcare for eligible children ages birth through 5.",
+    't-disclaimer':    'This tool is not an official eligibility determination. A coordinator from Foundation First will confirm eligibility during enrollment.',
+    't-sec1':          'About Your Family',
+    't-county-label':  'County or City',
+    't-county-ph':     'Select…',
+    't-size-label':    'People in household',
+    't-select-ph':     'Select…',
+    't-income-label':  'Annual household income ($)',
+    't-fpl-hint':      '▾ 2026 income eligibility thresholds',
+    't-fpl-title':     '2026 Federal Poverty Level Guidelines',
+    't-fpl-h1': 'Family size', 't-fpl-h2': '100% FPL', 't-fpl-h3': '200% FPL', 't-fpl-h4': '350% FPL',
+    't-fpl-note':      '100% FPL is the primary income threshold for Head Start. 200% FPL applies to VPI and Mixed Delivery. Families between 200–350% FPL may qualify for Mixed Delivery through Ready Region North Central regional criteria. Other qualifying factors may apply regardless of income.',
+    't-other-q':       'Does any of the following apply to your family?',
+    't-other-opt':     '(optional — select all that apply)',
+    't-oc1':  'Parent or guardian did not complete high school',
+    't-oc2':  'Both parents are younger than 20 years old',
+    't-oc3':  'Parent or caregiver has a disability that impacts their ability to maintain employment or provide care',
+    't-oc4':  'A parent is on military deployment for 9+ months this year',
+    't-oc5':  'Single parent or guardian with sole financial and caretaking responsibilities',
+    't-oc6':  'Parent, guardian, or caregiver is currently incarcerated or was released within the past 2 years',
+    't-oc7':  'Family experiencing homelessness',
+    't-oc8':  'Family has immigrated within the past 2 years',
+    't-oc9':  'Family is below the ALICE household survival budget',
+    't-oc10': 'Family receives government assistance (WIC, SNAP, TANF, or similar)',
+    't-oc11': 'Child or family has experienced abuse, trauma, or crisis in the past 5 years',
+    't-oc12': 'Child has a disability or is eligible for special education (IDEA)',
+    't-oc13': 'Child is in kinship or foster care',
+    't-oc14': 'Child is an English Language Learner',
+    't-sec2':          "Children You'd Like to Enroll",
+    't-children-hint': "Programs serve children from birth through age 5 (not yet in kindergarten). Select each child's age below.",
+    't-add-child':     '+ Add another child',
+    't-btn-check':     'Check My Eligibility →',
+    't-contact-h':     'Want someone to follow up with you?',
+    't-contact-body':  'Leave your contact info and a Foundation First coordinator will reach out. This is completely optional — your result above is yours to keep regardless.',
+    't-name-label':    'Name',
+    't-email-label':   'Email',
+    't-zip-label':     'Zip Code',
+    't-privacy':       'Your information will only be used to follow up on your eligibility screening. It will not be shared with third parties. You may request removal at any time by contacting <a href="mailto:info@foundationfirstva.org">info@foundationfirstva.org</a>.',
+    't-btn-submit':    'Submit — Connect Me with a Coordinator',
+    't-btn-skip':      'No thanks — I have what I need',
+    't-confirm-h':     "You're all set.",
+    't-restart':       'Start over',
+    'county-error':    'Please select your county or city.',
+    'size-error':      'Please select household size.',
+    'income-error':    'Please enter your annual income.',
+    'children-error':  "Please select at least one child's age.",
+    'zip-error':       'Please enter a valid 5-digit Virginia zip code.',
+    'child-label':     'Child',
+    'child-status-ok':  '✓ Eligible age',
+    'child-status-out': 'Over age 5',
+    'confirm-with':    'Thank you, {name}. A coordinator will be in touch soon at {contact}.',
+    'confirm-anon':    'A coordinator will be in touch soon. In the meantime, review the results above.',
+    'confirm-skip':    "Your results are shown above. Reach out to Foundation First whenever you're ready — foundationfirstva.org",
+    'r-tag-eligible':   'May Qualify',
+    'r-tag-ineligible': 'May Not Qualify',
+    'r-head-eligible':   'Your child may qualify for publicly funded care.',
+    'r-head-ineligible': 'Your family may not meet current eligibility criteria.',
+    'r-body-eligible':   "Based on what you've shared, your family may be eligible for one or more publicly funded early childhood programs. A coordinator will confirm eligibility and help connect you with a provider near you.",
+    'r-body-ineligible': "Based on what you've shared, your family may not currently meet eligibility criteria for publicly funded early childhood programs — but there may be other options, and a coordinator can review any additional factors that might apply.",
+    'r-programs-heading': 'Your child may qualify for publicly funded care through:',
+    'r-prog-hs':         '<strong>Head Start</strong> — federally funded early learning for income-eligible children 0–5. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Learn more</a>',
+    'r-prog-vpi':        '<strong>Virginia Preschool Initiative (VPI)</strong> — free preschool for eligible 3- and 4-year-olds. Age eligibility may vary by location. <a href="https://www.doe.virginia.gov/early-child/preschool-initiative" target="_blank">Learn more</a>',
+    'r-prog-md':         '<strong>Mixed Delivery (MD)</strong> — high-quality childcare for eligible children 0–5. <a href="https://foundationfirstva.org/looking-for-childcare/" target="_blank">Learn more</a>',
+    'r-other1': '<strong>Child Care Subsidy Program (CCSP)</strong> — financial assistance for qualifying working families. <a href="https://www.dss.virginia.gov/family/cc/index.cgi" target="_blank">Learn more</a>',
+    'r-other2': '<strong>Head Start / Early Head Start</strong> — federal program for low-income families, children 0–5. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Find a program</a>',
+    'r-other3': '<strong>Virginia Preschool Initiative (VPI)</strong> — free preschool for income-eligible 3- and 4-year-olds. <a href="https://www.doe.virginia.gov/early-child/preschool-initiative" target="_blank">Learn more</a>',
+    'r-other4': 'Contact Foundation First directly — other local criteria may apply. <a href="https://foundationfirstva.org/looking-for-childcare/" target="_blank">foundationfirstva.org/looking-for-childcare</a>',
+  },
+  es: {
+    'lang-toggle':     'View in English',
+    't-program-pill':  'Programas de Primera Infancia',
+    't-h1':            '¿Su hijo <span class="accent">califica</span> para cuidado infantil financiado públicamente?',
+    't-header-lead':   'Responda algunas preguntas para saber si su familia puede ser elegible para Head Start, la Iniciativa Preescolar de Virginia (VPI), o el programa de Mixed Delivery — cuidado infantil de alta calidad y de día completo para niños elegibles desde el nacimiento hasta los 5 años.',
+    't-disclaimer':    'Esta herramienta no es una determinación oficial de elegibilidad. Un coordinador de Foundation First confirmará la elegibilidad durante la inscripción.',
+    't-sec1':          'Sobre Su Familia',
+    't-county-label':  'Condado o Ciudad',
+    't-county-ph':     'Seleccione…',
+    't-size-label':    'Personas en el hogar',
+    't-select-ph':     'Seleccione…',
+    't-income-label':  'Ingresos anuales del hogar ($)',
+    't-fpl-hint':      '▾ Límites de ingresos elegibles 2026',
+    't-fpl-title':     'Pautas del Nivel Federal de Pobreza 2026',
+    't-fpl-h1': 'Tamaño familiar', 't-fpl-h2': '100% FPL', 't-fpl-h3': '200% FPL', 't-fpl-h4': '350% FPL',
+    't-fpl-note':      'El 100% FPL es el umbral de ingresos principal para Head Start. El 200% FPL aplica para VPI y Mixed Delivery. Las familias entre 200–350% FPL pueden calificar para Mixed Delivery mediante criterios regionales. Otros factores pueden aplicar independientemente del ingreso.',
+    't-other-q':       '¿Aplica alguna de las siguientes situaciones a su familia?',
+    't-other-opt':     '(opcional — seleccione todas las que apliquen)',
+    't-oc1':  'El padre o tutor no completó la escuela secundaria',
+    't-oc2':  'Ambos padres son menores de 20 años',
+    't-oc3':  'El padre o cuidador tiene una discapacidad que afecta su capacidad de mantener empleo o proveer cuidado',
+    't-oc4':  'Un padre está en despliegue militar por 9 o más meses este año',
+    't-oc5':  'Padre o tutor único con responsabilidades financieras y de cuidado exclusivas',
+    't-oc6':  'El padre, tutor o cuidador está encarcelado actualmente o fue liberado en los últimos 2 años',
+    't-oc7':  'Familia sin hogar',
+    't-oc8':  'La familia ha inmigrado en los últimos 2 años',
+    't-oc9':  'La familia está por debajo del presupuesto de supervivencia del hogar ALICE',
+    't-oc10': 'La familia recibe asistencia gubernamental (WIC, SNAP, TANF u otros)',
+    't-oc11': 'El niño o la familia ha experimentado abuso, trauma o crisis en los últimos 5 años',
+    't-oc12': 'El niño tiene una discapacidad o es elegible para educación especial (IDEA)',
+    't-oc13': 'El niño está en cuidado familiar o de crianza',
+    't-oc14': 'El niño es aprendiz del inglés (English Language Learner)',
+    't-sec2':          'Niños que Desea Inscribir',
+    't-children-hint': 'Los programas atienden a niños desde el nacimiento hasta los 5 años (que aún no estén en kindergarten). Seleccione la edad de cada niño.',
+    't-add-child':     '+ Agregar otro niño',
+    't-btn-check':     'Verificar Mi Elegibilidad →',
+    't-contact-h':     '¿Desea que alguien le dé seguimiento?',
+    't-contact-body':  'Deje su información de contacto y un coordinador de Foundation First se comunicará con usted. Esto es completamente opcional.',
+    't-name-label':    'Nombre',
+    't-email-label':   'Correo electrónico',
+    't-zip-label':     'Código Postal',
+    't-privacy':       'Su información solo se utilizará para dar seguimiento a su evaluación de elegibilidad. No se compartirá con terceros. Puede solicitar su eliminación en cualquier momento contactando a <a href="mailto:info@foundationfirstva.org">info@foundationfirstva.org</a>.',
+    't-btn-submit':    'Enviar — Conectarme con un Coordinador',
+    't-btn-skip':      'No gracias — ya tengo lo que necesito',
+    't-confirm-h':     'Todo listo.',
+    't-restart':       'Empezar de nuevo',
+    'county-error':    'Por favor seleccione su condado o ciudad.',
+    'size-error':      'Por favor seleccione el tamaño del hogar.',
+    'income-error':    'Por favor ingrese sus ingresos anuales.',
+    'children-error':  'Por favor seleccione la edad de al menos un niño.',
+    'zip-error':       'Por favor ingrese un código postal válido de 5 dígitos.',
+    'child-label':     'Niño',
+    'child-status-ok':  '✓ Edad elegible',
+    'child-status-out': 'Mayor de 5 años',
+    'confirm-with':    'Gracias, {name}. Un coordinador se comunicará pronto a {contact}.',
+    'confirm-anon':    'Un coordinador se comunicará pronto. Mientras tanto, revise los resultados anteriores.',
+    'confirm-skip':    'Sus resultados se muestran arriba. Comuníquese con Foundation First cuando esté listo — foundationfirstva.org',
+    'r-tag-eligible':   'Puede Calificar',
+    'r-tag-ineligible': 'Puede No Calificar',
+    'r-head-eligible':   'Su hijo puede calificar para cuidado infantil financiado públicamente.',
+    'r-head-ineligible': 'Su familia puede no cumplir los criterios actuales de elegibilidad.',
+    'r-body-eligible':   'Según lo que ha compartido, su familia puede ser elegible para uno o más programas de primera infancia financiados públicamente. Un coordinador confirmará la elegibilidad y le ayudará a conectarse con un proveedor cerca de usted.',
+    'r-body-ineligible': 'Según lo que ha compartido, su familia puede no cumplir actualmente los criterios de elegibilidad — pero puede haber otras opciones, y un coordinador puede revisar factores adicionales que puedan aplicar.',
+    'r-programs-heading': 'Su hijo puede calificar para cuidado financiado públicamente mediante:',
+    'r-prog-hs':         '<strong>Head Start</strong> — aprendizaje temprano financiado federalmente para niños 0–5. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Más información</a>',
+    'r-prog-vpi':        '<strong>Iniciativa Preescolar de Virginia (VPI)</strong> — preescolar gratuito para niños elegibles de 3 y 4 años. La elegibilidad por edad puede variar. <a href="https://www.doe.virginia.gov/early-child/preschool-initiative" target="_blank">Más información</a>',
+    'r-prog-md':         '<strong>Mixed Delivery (MD)</strong> — cuidado infantil de alta calidad y día completo para niños elegibles 0–5. <a href="https://foundationfirstva.org/looking-for-childcare/" target="_blank">Más información</a>',
+    'r-other1': '<strong>Programa de Subsidio para el Cuidado Infantil (CCSP)</strong> — asistencia financiera para familias trabajadoras. <a href="https://www.dss.virginia.gov/family/cc/index.cgi" target="_blank">Más información</a>',
+    'r-other2': '<strong>Head Start / Early Head Start</strong> — programa federal para familias de bajos ingresos, niños 0–5. <a href="https://www.acf.hhs.gov/ohs" target="_blank">Encontrar un programa</a>',
+    'r-other3': '<strong>Iniciativa Preescolar de Virginia (VPI)</strong> — preescolar gratuito para niños de 3 y 4 años. <a href="https://www.doe.virginia.gov/early-child/preschool-initiative" target="_blank">Más información</a>',
+    'r-other4': 'Comuníquese directamente con Foundation First — pueden aplicar otros criterios locales. <a href="https://foundationfirstva.org/looking-for-childcare/" target="_blank">foundationfirstva.org/looking-for-childcare</a>',
+  }
+};
+
+let lang = 'en';
+let currentResult   = null;
+let currentPrograms = {};
+let childCount = 1;
+
+function t(k) { return T[lang][k] !== undefined ? T[lang][k] : (T.en[k] || ''); }
+
+function toggleLang() {
+  lang = lang === 'en' ? 'es' : 'en';
+  document.documentElement.lang = lang;
+  applyLang();
+}
+
+function applyLang() {
+  Object.keys(T.en).forEach(k => {
+    const el = document.getElementById(k);
+    if (el) el.innerHTML = t(k);
+  });
+  ['county-error','size-error','income-error','children-error','zip-error'].forEach(k => {
+    const el = document.getElementById(k);
+    if (el) el.textContent = t(k);
+  });
+  document.getElementById('contact-name').placeholder = lang === 'en' ? 'Your name' : 'Su nombre';
+  for (let i = 0; i < childCount; i++) {
+    const lbl = document.getElementById('child-label-' + i);
+    if (lbl) lbl.textContent = `${t('child-label')} ${i + 1}`;
+    const cs = document.getElementById('cs-' + i);
+    if (cs) {
+      if (cs.dataset.state === 'ok')  cs.textContent = t('child-status-ok');
+      if (cs.dataset.state === 'out') cs.textContent = t('child-status-out');
+    }
+  }
+  if (currentResult) renderResult(currentResult, currentPrograms);
+}
+function matchedPrograms(p) {
+  const out = [];
+  if (p.hs)  out.push('Head Start');
+  if (p.vpi) out.push('VPI');
+  if (p.md)  out.push('Mixed Delivery');
+  return out;
+}
+function addChild() {
+  if (childCount >= 6) return;
+  const list = document.getElementById('children-list');
+  const div  = document.createElement('div');
+  div.className = 'child-row';
+  div.id = 'child-' + childCount;
+  const i = childCount;
+  div.innerHTML = `<label id="child-label-${i}">${t('child-label')} ${i + 1}</label>
+    <select onchange="updateChildStatus(${i},this.value)" id="child-age-${i}">
+      <option value="">Age…</option>
+      <option value="0">Under 1 year</option>
+      <option value="1">1 year old</option>
+      <option value="2">2 years old</option>
+      <option value="3">3 years old</option>
+      <option value="4">4 years old</option>
+      <option value="5">5 years old</option>
+    </select>
+    <span class="child-status" id="cs-${i}"></span>`;
+  list.appendChild(div);
+  childCount++;
+}
+
+function updateChildStatus(idx, val) {
+  const el = document.getElementById('cs-' + idx);
+  if (!el || val === '') { if (el) { el.textContent = ''; el.dataset.state = ''; } return; }
+  const age = parseInt(val);
+  if (age <= 5) {
+    el.textContent = t('child-status-ok');
+    el.className   = 'child-status ok-green';
+    el.dataset.state = 'ok';
+  } else {
+    el.textContent = t('child-status-out');
+    el.className   = 'child-status out';
+    el.dataset.state = 'out';
+  }
+}
+
+function getChildAges() {
+  const ages = [];
+  for (let i = 0; i < childCount; i++) {
+    const sel = document.getElementById('child-age-' + i);
+    if (sel && sel.value !== '') ages.push(parseInt(sel.value));
+  }
+  return ages;
+}
+
+document.querySelectorAll('.option-card input').forEach(inp => {
+  inp.addEventListener('change', function() {
+    this.closest('.option-card').classList.toggle('selected', this.checked);
+  });
+});
+
+function showFieldError(fId, eId) {
+  const f = document.getElementById(fId); if (f) f.classList.add('error');
+  const e = document.getElementById(eId); if (e) e.classList.add('visible');
+}
+
+function clearFieldError(fId, eId) {
+  const f = document.getElementById(fId); if (f) f.classList.remove('error');
+  const e = document.getElementById(eId); if (e) e.classList.remove('visible');
+}
+
+// ─── Eligibility logic ────────────────────────────────────────────────────────
+function determinePrograms(income, size, factors, ages) {
+  const idx = Math.min(size - 1, 7);
+  const p   = { hs: false, vpi: false, md: false};
+
+  const hasEligibleChild  = ages.some(a => a <= 5);
+  const hasVPIChild       = ages.some(a => a === 3 || a === 4);
+  const hasDisability     = factors.includes('disability');
+  const hasHomeless       = factors.includes('homeless');
+  const hasKinship        = factors.includes('kinship');
+  const hasGovtAssistance = factors.includes('govt-assistance');
+  const hasNoHS           = factors.includes('no-hs');
+  const hasRegional       = factors.some(f => REGIONAL_FACTORS.includes(f));
+
+  // Head Start
+  if (hasEligibleChild) {
+    if (income <= FPL_100[idx] || hasDisability || hasHomeless || hasKinship || hasGovtAssistance) {
+      p.hs = true;
+    }
+  }
+
+  // VPI (age 3–4 only)
+  if (hasVPIChild) {
+    if (income <= FPL_200[idx] || hasDisability || hasHomeless || hasNoHS) {
+      p.vpi = true;
+    }
+  }
+
+  // Mixed Delivery
+  if (hasEligibleChild) {
+    if (income <= FPL_200[idx] || hasDisability || hasHomeless || hasNoHS || hasRegional) {
+      p.md = true;
+    }
+  }
+
+  return p;
+}
+
+function checkEligibility() {
+  let ok = true;
+  clearFieldError('county','county-error');
+  clearFieldError('household-size','size-error');
+  clearFieldError('income','income-error');
+
+  if (!document.getElementById('county').value)         { showFieldError('county','county-error'); ok = false; }
+  if (!document.getElementById('household-size').value) { showFieldError('household-size','size-error'); ok = false; }
+  if (!document.getElementById('income').value)         { showFieldError('income','income-error'); ok = false; }
+
+  const ages     = getChildAges();
+  const childErr = document.getElementById('children-error');
+  if (ages.length === 0) { childErr.classList.add('visible'); ok = false; }
+  else                   { childErr.classList.remove('visible'); }
+
+  if (!ok) return;
+
+  const size    = parseInt(document.getElementById('household-size').value);
+  const income  = parseFloat(document.getElementById('income').value);
+  const factors = Array.from(document.querySelectorAll('[name="other-criteria"]:checked')).map(c => c.value);
+  const programs = determinePrograms(income, size, factors, ages);
+
+  const anyMatch    = programs.hs || programs.vpi || programs.md;
+
+  let result;
+  if (anyMatch)       result = 'eligible';
+  else                result = 'ineligible';
+
+  currentResult   = result;
+  currentPrograms = programs;
+  renderResult(result, programs);
+  // Send check event to Flow 1
+  fetch('https://defaultb77af9635d864e95b7e610c711ac58.f4.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/f5d41fc5ae224b13a0599d4422a9845c/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=HmRP9zSyHus3JWi4uH8OBaLxTwdoHHiSGjTc44yG9d8', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      session_id:       SESSION_ID,
+      timestamp:        new Date().toISOString(),
+      county:           document.getElementById('county').value,
+      household_size:   parseInt(document.getElementById('household-size').value),
+      annual_income:    parseFloat(document.getElementById('income').value),
+      child_ages:       ages,
+      other_factors:    factors.map(v => OC_LABELS[v]),
+      result:           result,
+      matched_programs: matchedPrograms(programs),
+      language:         lang === 'es' ? 'Spanish' : 'English'
+    })
+  }).catch(() => {});
+  document.getElementById('contact-section').style.display = 'block';
+  document.getElementById('result-box').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function renderResult(result, programs) {
+  const box = document.getElementById('result-box');
+  box.className    = result;
+  box.style.display = 'block';
+
+  document.getElementById('r-tag').textContent     = t(`r-tag-${result}`);
+  document.getElementById('r-heading').textContent = t(`r-head-${result}`);
+  document.getElementById('r-body').textContent    = t(`r-body-${result}`);
+
+  const list = document.getElementById('r-list');
+  list.innerHTML = '';
+
+  if (result === 'eligible') {
+    const hd = document.createElement('li');
+    hd.className = 'programs-heading';
+    hd.innerHTML = `<span>${t('r-programs-heading')}</span>`;
+    list.appendChild(hd);
+
+    if (programs.hs) {
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="r-icon">→</span><span>${t('r-prog-hs')}</span>`;
+      list.appendChild(li);
+    }
+    if (programs.vpi) {
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="r-icon">→</span><span>${t('r-prog-vpi')}</span>`;
+      list.appendChild(li);
+    }
+    if (programs.md) {
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="r-icon">→</span><span>${t('r-prog-md')}</span>`;
+      list.appendChild(li);
+    }
+  } else {
+    ['r-other1','r-other2','r-other3','r-other4'].forEach(k => {
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="r-icon">→</span><span>${t(k)}</span>`;
+      list.appendChild(li);
+    });
+  }
+}
+
+function toggleFpl() { document.getElementById('fpl-table').classList.toggle('open'); }
+
+// ─── Contact submission ───────────────────────────────────────────────────────
+function submitContact() {
+  const name  = document.getElementById('contact-name').value.trim();
+  const email = document.getElementById('contact-email').value.trim();
+  const zip   = document.getElementById('contact-zip').value.trim();
+
+  if (!email) {
+    alert(lang === 'es'
+      ? 'Por favor ingrese un correo electrónico o número de teléfono para continuar.'
+      : 'Please enter at least an email address to continue.'
+    );
+    return;
+  }
+
+  const isVAZip = z => { if (!/^\d{5}$/.test(z)) return false; const n = parseInt(z); return (n>=20101&&n<=20199)||(n>=20301&&n<=20598)||(n>=22001&&n<=24699); };
+  if (!isVAZip(zip)) {
+    showFieldError('contact-zip','zip-error');
+    document.getElementById('contact-zip').focus();
+    return;
+  }
+  clearFieldError('contact-zip','zip-error');
+
+  const county  = document.getElementById('county').value;
+  const size    = document.getElementById('household-size').value;
+  const income  = document.getElementById('income').value;
+  const ages    = getChildAges();
+  const factors = Array.from(document.querySelectorAll('[name="other-criteria"]:checked')).map(c => c.value);
+
+  const programs = matchedPrograms(currentPrograms);
+
+  const resultLabel = currentResult === 'eligible' ? 'MAY QUALIFY'
+                    : 'MAY NOT QUALIFY';
+
+  const payload = {
+    session_id: SESSION_ID,
+    result:           currentResult,
+    result_label:     resultLabel,
+    matched_programs: programs,
+    language:         lang === 'es' ? 'Spanish' : 'English',
+    submitted_at:     new Date().toISOString(),
+    name:             name   || null,
+    email:            email  || null,
+    zip:              zip,
+    county:           county,
+    household_size:   parseInt(size),
+    annual_income:    parseFloat(income),
+    child_ages:       ages,
+    other_factors:    factors.length ? factors.map(v => OC_LABELS[v]) : []
+  };
+
+  const FLOW_URL = 'https://defaultb77af9635d864e95b7e610c711ac58.f4.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/d56e916401a142fb8929b9cfaba442b3/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=3zseojJuIbrCbNQBqt0vu1snay6CggJNEv7qsWt160g';
+
+  fetch(FLOW_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+
+  showConfirm(name, email, false);
+}
+
+function skipContact() { showConfirm(null, null, true); }
+
+function showConfirm(name, contact, skipped) {
+  document.getElementById('screener-card').style.display = 'none';
+  const box = document.getElementById('confirm-box');
+  box.style.display = 'block';
+  const msg = document.getElementById('confirm-message');
+  if (skipped) {
+    msg.textContent = t('confirm-skip');
+  } else if (name) {
+    msg.textContent = t('confirm-with').replace('{name}', name).replace('{contact}', contact || 'the info you provided');
+  } else {
+    msg.textContent = t('confirm-anon');
+  }
+  box.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function restart() {
+  ['contact-name','contact-email','contact-zip'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  document.getElementById('county').value = '';
+  document.getElementById('household-size').value = '';
+  document.getElementById('income').value = '';
+  document.querySelectorAll('[name="other-criteria"]').forEach(cb => {
+    cb.checked = false; cb.closest('.option-card').classList.remove('selected');
+  });
+  childCount = 1;
+  document.getElementById('children-list').innerHTML = `
+    <div class="child-row" id="child-0">
+      <label id="child-label-0">${t('child-label')} 1</label>
+      <select onchange="updateChildStatus(0,this.value)" id="child-age-0">
+        <option value="">Age…</option>
+        <option value="0">Under 1 year</option>
+        <option value="1">1 year old</option>
+        <option value="2">2 years old</option>
+        <option value="3">3 years old</option>
+        <option value="4">4 years old</option>
+        <option value="5">5 years old</option>
+      </select>
+      <span class="child-status" id="cs-0"></span>
+    </div>`;
+  document.getElementById('result-box').style.display      = 'none';
+  document.getElementById('contact-section').style.display = 'none';
+  document.getElementById('confirm-box').style.display     = 'none';
+  document.getElementById('screener-card').style.display   = 'block';
+  document.getElementById('fpl-table').classList.remove('open');
+  currentResult   = null;
+  currentPrograms = {};
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+</script>
+</body>
+</html>
