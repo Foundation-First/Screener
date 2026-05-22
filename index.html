@@ -772,7 +772,7 @@ const T = {
     'child-status-out': 'Over age 5',
     'confirm-with': 'Thank you, {name}. Check your inbox for the information we just sent to {contact}.',
     'confirm-anon': 'Check your inbox for the information we just sent you.',
-    'confirm-skip':    "Your results are shown above. Reach out to Foundation First whenever you're ready — foundationfirstva.org",
+    //'confirm-skip':    "Your results are shown above. Reach out to Foundation First whenever you're ready — foundationfirstva.org",
     'r-tag-eligible':   'May Qualify',
     'r-tag-ineligible': 'May Not Qualify',
     'r-head-eligible':   'Your child may qualify for publicly funded care.',
@@ -847,7 +847,7 @@ const T = {
     'child-status-out': 'Mayor de 5 años',
     'confirm-with': 'Gracias, {name}. Revise su bandeja de entrada para ver la información que le enviamos a {contact}.',
     'confirm-anon': 'Revise su bandeja de entrada para ver la información que le enviamos.',
-    'confirm-skip':    'Sus resultados se muestran arriba. Comuníquese con Foundation First cuando esté listo — foundationfirstva.org',
+    //'confirm-skip':    'Sus resultados se muestran arriba. Comuníquese con Foundation First cuando esté listo — foundationfirstva.org',
     'r-tag-eligible':   'Puede Calificar',
     'r-tag-ineligible': 'Puede No Calificar',
     'r-head-eligible':   'Su hijo puede calificar para cuidado infantil financiado públicamente.',
@@ -1193,7 +1193,7 @@ function showConfirm(name, contact, skipped) {
   box.style.display = 'block';
   const msg = document.getElementById('confirm-message');
   if (skipped) {
-    msg.textContent = t('confirm-skip');
+    msg.textContent = "";
   } else if (name) {
     msg.textContent = t('confirm-with').replace('{name}', name).replace('{contact}', contact || 'the info you provided');
   } else {
