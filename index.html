@@ -1054,7 +1054,7 @@ function checkEligibility() {
       timestamp:        new Date().toISOString(),
       county:           document.getElementById('county').value,
       household_size:   parseInt(document.getElementById('household-size').value),
-      annual_income:    parseFloat(document.getElementById('income').value),
+      annual_income:    Math.round(parseFloat(document.getElementById('income').value)),
       child_ages:       ages,
       other_factors:    factors.map(v => OC_LABELS[v]),
       result:           result,
@@ -1169,7 +1169,7 @@ function submitContact() {
     zip:              zip,
     county:           county,
     household_size:   parseInt(size),
-    annual_income:    parseFloat(income),
+    annual_income:    Math.round(parseFloat(income)),
     child_ages:       ages,
     other_factors:    factors.length ? factors.map(v => OC_LABELS[v]) : []
   };
